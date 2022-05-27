@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPTable;
@@ -18,7 +17,7 @@ import in.ashokit.response.SearchResponse;
 public class PdfGenerator {
 
 	public void generatePdf(List<SearchResponse> records, HttpServletResponse response)
-			throws DocumentException, IOException {
+			throws IOException {
 		Document document = new Document();
 		PdfWriter writer = PdfWriter.getInstance(document, response.getOutputStream());
 		document.open();

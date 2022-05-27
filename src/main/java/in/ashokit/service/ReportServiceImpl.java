@@ -22,19 +22,17 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public List<String> loadPlanNames() {
-		List<String> plans = repository.getUniquePlanNames();
-		return plans;
+		return repository.getUniquePlanNames();
 	}
 
 	@Override
 	public List<String> loadPlanStatuses() {
-		List<String> planStatuses = repository.getUniquePlanStatuses();
-		return planStatuses;
+		return repository.getUniquePlanStatuses();
 	}
 
 	@Override
 	public List<SearchResponse> searchPlans(SearchRequest request) {
-		List<EligibilityDtlsEntity> eligRecords = null;
+		List<EligibilityDtlsEntity> eligRecords=null;
 
 		if (validateRequest(request)) {
 			eligRecords = repository.findAll();
@@ -48,24 +46,22 @@ public class ReportServiceImpl implements ReportService {
 
 			EligibilityDtlsEntity entity = new EligibilityDtlsEntity();
 
-			if (planName != null && !planName.equals("")) {
+			if (planName != null && !"".equals(planName)) {
 				entity.setPlanName(planName);
 			}
-			if (planStatus != null && !planStatus.equals("")) {
+			if (planStatus != null && !"".equals(planStatus)) {
 				entity.setPlanStatus(planStatus);
 			}
 			if (startDate != null && endDate != null) {
 				entity.setStartDate(startDate);
 				entity.setEndDate(endDate);
 			}
-			System.out.println(entity.toString());
-
 			Example<EligibilityDtlsEntity> of = Example.of(entity);
 			eligRecords = repository.findAll(of);
 
 		}
 
-		List<SearchResponse> response = new ArrayList<SearchResponse>();
+		List<SearchResponse> response = new ArrayList<>();
 		for (EligibilityDtlsEntity eligRecord : eligRecords) {
 			SearchResponse sr = new SearchResponse();
 			BeanUtils.copyProperties(eligRecord, sr);
@@ -78,10 +74,10 @@ public class ReportServiceImpl implements ReportService {
 	private boolean validateRequest(SearchRequest request) {
 		boolean isEmpty = true;
 
-		if (request.getPlanName() != null && !request.getPlanName().equals("")) {
+		if (request.getPlanName() != null && !"".equals(request.getPlanName())) {
 			return isEmpty = false;
 		}
-		if (request.getPlanStatus() != null && !request.getPlanStatus().equals("")) {
+		if (request.getPlanStatus() != null && !"".equals(request.getPlanStatus())) {
 			return isEmpty = false;
 		}
 		if (request.getStartDate() != null && request.getEndDate() != null) {

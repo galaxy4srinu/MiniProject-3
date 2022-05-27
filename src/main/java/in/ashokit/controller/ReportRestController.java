@@ -52,7 +52,7 @@ public class ReportRestController {
 	}
 
 	@GetMapping("/pdf")
-	public void generatePdf(HttpServletResponse httpResponse) throws Exception {
+	public void generatePdf(HttpServletResponse httpResponse) throws IOException  {
 
 		httpResponse.setContentType("application/pdf");
 		String headerKey = "Content-Disposition";
